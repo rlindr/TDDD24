@@ -11,14 +11,14 @@
 					<div class="box1">
 					</div>
 					<div class="box2">
-			    		<form name="sign-in" onclick="checksignin()" >
+			    		<form name="sign-in" action="#" onsubmit="return checksignin();" >
 							<div class ="blck">
 							<label for="email">Email</label>
-							<input type="text" name="email"><br>
+							<input type="text" id="email" ><br>
 							</div>
 							<div class ="blck">
 							<label for="password">Password</label>
-							<input type="text" name="password"><br>
+							<input type="text" id="password"><br>
 							</div>
 						<div class ="blck">
 						<button style="float:right;" type="login">LogIn</button>
@@ -30,16 +30,16 @@
 						<div class ="blck">
 						<h3 align="center">Sign up here</h3>
 						</div>
-						<form name="signupform" action="#" onsubmit="return validateForm();">
+						<form name="signupform" action="#" onsubmit="return checksign();">
 						
 						<div class ="blck">
 						<label  for="firstname">First name</label>
-						<input  type="text" name="firstname"><br>
+						<input  type="text" id="firstname"><br>
 						</div>
 						
 						<div class ="blck">
 						<label  for="familyname">Family name</label>
-						<input  type="text" name="familyname"><br>
+						<input  type="text" id="familyname"><br>
 						</div>
 						
 						<div class ="blck">
@@ -52,27 +52,27 @@
 						
 						<div class ="blck">	
 						<label for="city">City</label>
-						<input type="text" name="city"><br>
+						<input type="text" id="city"><br>
 						</div>
 						
 						<div class ="blck">
 						<label for="country">Country</label>
-						<input type="text" name="country"><br>
+						<input type="text" id="country"><br>
 						</div>
 						
 						<div class ="blck">
-						<label for="email">Email</label>
-						<input type="text" name="email"><br>
+						<label for="mail">Email</label>
+						<input type="text" id="mail"><br>
 						</div>
 						
 						<div class ="blck">
 						<label for="password">Password</label>
-						<input type="password" name="psw"><br>
+						<input type="password" id="psw"><br>
 						</div>
 						
 						<div class ="blck">
 						<label for="repeatpsw">Repeat PSW</label>
-						<input type="password" name="repeatpsw"><br>
+						<input type="password" id="repeatpsw"><br>
 						</div>
 						
 						<div class ="blck">

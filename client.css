@@ -50,3 +50,8 @@ float:right;
 	display: inline-block; width: 117px; text-align: left;
 	
 }
+
+.redborder{
+	border:solid red;
+}
+
