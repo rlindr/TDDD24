@@ -89,3 +89,30 @@ function checksign(){
     }
   }
 
+
+function home()
+{
+  document.getElementById("home").className = "show";
+  document.getElementById("browse").className = "hidden";
+  document.getElementById("account").className = "hidden";
+}
+
+function browse()
+{
+  document.getElementById("home").className = "hidden";
+  document.getElementById("browse").className =  "show";
+  document.getElementById("account").className =  "hidden";
+}
+
+function account()
+{
+  document.getElementById("home").className = "hidden";
+  document.getElementById("browse").className = "hidden";
+  document.getElementById("account").className = "show";
+}
+
+
+
+
+
+

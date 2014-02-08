@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="client.css">
+		<script src="client.js" type="text/javascript"></script>
+		<script src="serverstub.js" type="text/javascript"></script>
+		<script id="welcomeBody" type=”text/view”>
+			
+		</script>
+
+		<style>
+		table,th,td
+		{
+		border:3px solid black;
+		border-collapse:collapse;
+		}
+		th,td
+		{
+		padding:5px;
+		}
+		</style>
+    </head>
+    <body>
+		<div id="home" class="show">
+			<table style="width:800px">
+				<tr>
+				  <th onclick="home()" bgcolor="#D3D3D3">Home</th>
+				  <th onclick="browse()">Browse</th>		
+				  <th onclick="account()">Account</th>
+				  </tr>
+				<tr>
+				  <td>h1</td>
+				  <td>h2</td> 
+				  <td>h3</td>
+				</tr>
+				<tr>
+				  <td>h11</td>
+				  <td>h22</td> 
+				  <td>h33</td>
+				</tr>
+			</table>
+		</div>
+
+		<div id="browse" class="hidden">
+			<table style="width:800px">
+				<tr>
+				  	<th onclick="home()">Home</th>
+				  	<th onclick="browse()" bgcolor="#D3D3D3">Browse</th>		
+				  	<th onclick="account()">Account</th>
+				 	</tr>
+				<tr>
+					<td>b1</td>
+					<td>b2</td> 
+					<td>b3</td>
+				</tr>
+				<tr>
+					<td>b11</td>
+					<td>b22</td> 
+					<td>b33</td>
+				</tr>
+			</table>
+		</div>
+
+		<div id="account" class="hidden">
+			<table style="width:800px">
+				<tr>
+				  	<th onclick="home()">Home</th>
+				  	<th onclick="browse()">Browse</th>		
+				  	<th onclick="account()" bgcolor="#D3D3D3">Account</th>
+				 </tr>
+					<tr>
+					  <td>a1</td>
+					  <td>a2</td> 
+					  <td>a3</td>
+					</tr>
+					<tr>
+					  <td>a11</td>
+					  <td>a22</td> 
+					  <td>a33</td>
+					</tr>
+			</table>
+		</div>
+    </body>
+</html>
+
+
