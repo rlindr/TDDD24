@@ -1,14 +1,32 @@
+var logedin;
+
 function loadView(){
-  var x=3;
   
-  if(x==1){
+  /x will be changed to logedin*/
+
+  if(logedin==undefined){
 	document.getElementById("welcomeView").innerHTML = document.getElementById("welcomeBody").innerHTML;
-	}
-  
-  if(x==2){document.getElementById("profileView").innerHTML = document.getElementById("profileBody").innerHTML;
+	startview();
   }
   
-  if(x==3){document.getElementById("friendView").innerHTML = document.getElementById("friendBody").innerHTML;}
+  if(logedin!=undefined){document.getElementById("profileView").innerHTML = document.getElementById("profileBody").innerHTML;
+  homeview();
+  }
+  
+  if(logedin==6){document.getElementById("friendView").innerHTML = document.getElementById("friendBody").innerHTML;}
+  browseview();
+  }
+
+
+var logout = function(token){
+  var utloggad = serverstub.signOut(logedin); 
+    if(utloggad.message = "Successfully signed out."){
+    logedin=undefined;
+    loadView();
+    }
+    else{
+      alert("Try to log out again");
+    }
 }
 
 
@@ -37,10 +55,13 @@ var checksignin = function(formData){
           }
         else{
 
-          var validid = serverstub.signIn(email1,password1);
+          validid = serverstub.signIn(email1,password1);
           document.getElementById("in").innerHTML = validid.message;
-
+          logedin = validid.data;
         }
+
+        logedin=2;  //Vi kan ta bort denna sen, är bara en dummy variabel
+        loadView(); //Denna flyttas in ovan
 
 }
 
@@ -137,7 +158,26 @@ function account()
   document.getElementById("account").className = "show";
 }
 
+function startview()
+{
+  document.getElementById("startview").className = "show";
+  document.getElementById("homeview").className = "hidden";
+  document.getElementById("browseview").className = "hidden";
+}
 
+function homeview()
+{
+  document.getElementById("startview").className = "hidden";
+  document.getElementById("homeview").className =  "show";
+  document.getElementById("browseview").className =  "hidden";
+}
+
+function browseview()
+{
+  document.getElementById("startview").className = "hidden";
+  document.getElementById("homeview").className = "hidden";
+  document.getElementById("browseview").className = "show";
+}
 
 
 
