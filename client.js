@@ -1,13 +1,3 @@
-//displayView = function(){
-//   
-//};
-//
-//
-//document.onload = function(){
-//    //code that is executed as the page is loaded.
-//};
-
-
 function loadView(){
   var x=1;
   
@@ -43,13 +33,26 @@ function checksignin(){
 
         }
 
-
 }
-function checksign(){
+
+var checksignup = function(formData){
+
+
+         var user ={
+
+          "email" : formData.email.value,
+          "password" : formData.password.value,
+          "firstname" : formData.firstname.value,
+          "familyname" : formData.familyname.value,
+          "gender" : formData.gender.value,
+          "city" : formData.city.value,
+          "country" : formData.country.value
+          
+          }
 
         var error2 =""
 
-        if(document.getElementById("firstname").value == "" || document.getElementById("familyname").value == "" ||  document.getElementById("city").value == "" || document.getElementById("country").value == "" ||  document.getElementById("mail").value == "" || document.getElementById("psw").value == "" || document.getElementById("repeatpsw").value == "" || (document.getElementById("psw").value != document.getElementById("repeatpsw").value)) {
+        if(document.getElementById("firstname").value == "" || document.getElementById("familyname").value == "" ||  document.getElementById("city").value == "" || document.getElementById("country").value == "" ||  document.getElementById("email").value == "" || document.getElementById("password").value == "" || document.getElementById("repeatpsw").value == "" || (document.getElementById("password").value != document.getElementById("repeatpsw").value)) {
         if(document.getElementById("firstname").value == "") {
          document.getElementById("firstname").style.borderColor = "red";
          error2 = "error";
@@ -70,13 +73,13 @@ function checksign(){
                error2 = "error";
         }
 
-        if(document.getElementById("mail").value == "") {
-         document.getElementById("mail").style.borderColor = "red";
+        if(document.getElementById("email").value == "") {
+         document.getElementById("email").style.borderColor = "red";
                error2 = "error";
         }
         
-        if(document.getElementById("psw").value == "") {
-         document.getElementById("psw").style.borderColor = "red";
+        if(document.getElementById("password").value == "") {
+         document.getElementById("password").style.borderColor = "red";
                error2 = "error";
         }
         
@@ -85,16 +88,21 @@ function checksign(){
                error2 = "error";
         }
 
-        if(document.getElementById("psw").value != document.getElementById("repeatpsw").value ) {
+        if(document.getElementById("password").value != document.getElementById("repeatpsw").value ) {
           document.getElementById("repeatpsw").style.borderColor = "red";
-           document.getElementById("psw").style.borderColor = "red";
+           document.getElementById("password").style.borderColor = "red";
                error2 = "error";
         }
 
     }
     else
     {
-      alert("funkar1"); //Här signar vi upp igen
+
+
+      var result = serverstub.signUp(user);
+      document.getElementById("r").innerHTML = result.message;
+
+
     }
   }
 
