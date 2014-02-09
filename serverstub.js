@@ -123,12 +123,15 @@ serverstub.signUp = function(formData){ // {email, password, firstname, familyna
             users[formData.email] = user;
             serverstub.persistUsers();
             return {"success": true, "message": "Successfully created a new user."};
+            
         }else{
             return {"success": false, "message": "Formdata not complete."};
+            
         }
 
     } else {
         return {"success": false, "message": "User already exists."};
+        
     }
 };
 serverstub.changePassword = function(token, oldPassword, newPassword){
