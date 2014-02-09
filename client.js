@@ -1,5 +1,5 @@
 function loadView(){
-  var x=1;
+  var x=3;
   
   if(x==1){
 	document.getElementById("welcomeView").innerHTML = document.getElementById("welcomeBody").innerHTML;
