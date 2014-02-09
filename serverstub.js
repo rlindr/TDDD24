@@ -136,11 +136,14 @@ serverstub.changePassword = function(token, oldPassword, newPassword){
         var email = serverstub.tokenToEmail(token);
         if (users[email].password == oldPassword){
             users[email].password = newPassword;
+  
             return {"success": true, "message": "Password changed."};
         } else {
+  
             return {"success": false, "message": "Wrong password."};
         }
     } else {
+
         return {"success": false, "message": "You are not logged in."};
     }
 };

@@ -9,9 +9,18 @@
 
 
 function loadView(){
+  var x=1;
+  
+  if(x==1){
 	document.getElementById("welcomeView").innerHTML = document.getElementById("welcomeBody").innerHTML;
-	
+	}
+  
+  if(x==2){document.getElementById("profileView").innerHTML = document.getElementById("profileBody").innerHTML;
+  }
+  
+  if(x==3){document.getElementById("friendView").innerHTML = document.getElementById("friendBody").innerHTML;}
 }
+
 
 function checksignin(){
 
