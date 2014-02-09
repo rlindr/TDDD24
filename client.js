@@ -12,24 +12,33 @@ function loadView(){
 }
 
 
-function checksignin(){
+var checksignin = function(formData){  
+
+          var userid ={
+
+          "email1" : formData.email1.value,
+          "password1" : formData.password1.value,
+          
+          }
+
 
         var error = ""
-        if( document.getElementById("email").value == "" || document.getElementById("password").value == "") {
-          if(document.getElementById("email").value == "") {
-           document.getElementById("email").style.borderColor = "red";
+        if( document.getElementById("email1").value == "" || document.getElementById("password1").value == "") {
+          if(document.getElementById("email1").value == "") {
+           document.getElementById("email1").style.borderColor = "red";
            error == "error";
           }
           
-          if(document.getElementById("password").value == "") {
-            document.getElementById("password").style.borderColor = "red";
+          if(document.getElementById("password1").value == "") {
+            document.getElementById("password1").style.borderColor = "red";
             error == "error";
           }
 
           }
         else{
 
-              alert("fungerar"); //Här ska vi signa upp sen
+          var validid = serverstub.signIn(email1,password1);
+          document.getElementById("in").innerHTML = validid.message;
 
         }
 
@@ -100,7 +109,7 @@ var checksignup = function(formData){
 
 
       var result = serverstub.signUp(user);
-      document.getElementById("r").innerHTML = result.message;
+      document.getElementById("up").innerHTML = result.message;
 
 
     }
