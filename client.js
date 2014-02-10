@@ -1,28 +1,27 @@
-var logedin;
 
-function loadView(){
+
+
+function loadView(viewid){
   
-  /x will be changed to logedin*/
-
-  if(logedin==undefined){
+  if(viewid==undefined){
 	document.getElementById("welcomeView").innerHTML = document.getElementById("welcomeBody").innerHTML;
 	startview();
   }
   
-  if(logedin!=undefined){document.getElementById("profileView").innerHTML = document.getElementById("profileBody").innerHTML;
+  if(viewid==2){document.getElementById("profileView").innerHTML = document.getElementById("profileBody").innerHTML;
   homeview();
   }
   
-  if(logedin==6){document.getElementById("friendView").innerHTML = document.getElementById("friendBody").innerHTML;}
+  if(viewid==3){document.getElementById("friendView").innerHTML = document.getElementById("friendBody").innerHTML;
   browseview();
   }
+}
 
 
-var logout = function(token){
+var logout = function(){
   var utloggad = serverstub.signOut(logedin); 
     if(utloggad.message = "Successfully signed out."){
-    logedin=undefined;
-    loadView();
+    loadView(undefined);
     }
     else{
       alert("Try to log out again");
@@ -57,9 +56,7 @@ var checksignin = function(formData){
 
           validid = serverstub.signIn(userid.email1,userid.password1);
           document.getElementById("in").innerHTML = validid.message;
-          logedin = 6;
-          loadView(logedin);
-          return false; //Denna flyttas in ovan
+          loadView(2);
 
         }
 
@@ -191,5 +188,7 @@ function browseview()
 }
 
 
-
+window.onload = function() {
+  loadView();
+}
 
