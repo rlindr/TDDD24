@@ -137,6 +137,15 @@ var checksignup = function(formData){
     }
   }
 
+function popdata(){
+  document.getElementById("fn").innerHTML = "Test";
+  document.getElementById("fmn").innerHTML = "test";
+  document.getElementById("gender1").innerHTML = "Test";
+  document.getElementById("city1").innerHTML = "Test";
+  document.getElementById("country1").innerHTML = "Test";
+  document.getElementById("email2").innerHTML = "Test";
+
+}
 
 function home()
 {
