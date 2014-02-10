@@ -4,7 +4,6 @@ function loadView(viewid){
   
   document.getElementById("welcomeView").innerHTML = document.getElementById("welcomeBody").innerHTML;
   document.getElementById("profileView").innerHTML = document.getElementById("profileBody").innerHTML;
-  document.getElementById("friendView").innerHTML = document.getElementById("friendBody").innerHTML;
 
   if(viewid==undefined){
 	startview();
@@ -13,10 +12,7 @@ function loadView(viewid){
   if(viewid!=undefined){
   homeview();
   }
-  
-  if(viewid==3){
-  browseview();
-  }
+
 }
 
 
@@ -38,6 +34,7 @@ var logout = function(){
   var utloggad = serverstub.signOut(localStorage.getItem("currentUser")); 
     if(utloggad.message = "Successfully signed out."){
     localStorage.setItem("currentUser", undefined);
+    localStorage.setItem("activeProfile", undefined);    
     loadView(undefined);
     }
     else{
@@ -74,6 +71,7 @@ var checksignin = function(formData){
           validid = serverstub.signIn(userid.email1,userid.password1);
           alert(document.getElementById("in").innerHTML = validid.message);
           localStorage.setItem("currentUser", validid.data);
+          localStorage.setItem("activeProfile", serverstub.getUserDataByToken(validid.data).data.email);
           loadView(validid.data);
 
         }
@@ -155,7 +153,7 @@ var checksignup = function(formData){
 
 var reloadwall = function(){
 
-var messages = serverstub.getUserMessagesByToken(localStorage.getItem("currentUser")).data;
+var messages = serverstub.getUserMessagesByEmail(localStorage.getItem("currentUser"), localStorage.getItem("activeProfile")).data;
 
 document.getElementById("wall").innerHTML = "";
 
@@ -169,20 +167,34 @@ document.getElementById("wall").innerHTML += messages[i].content + "<br>";
 
 }
 
+var finduser = function(formData){
+
+  var useremail ={
+
+    "emailinput" : formData.emailinput.value
+
+  }
+  localStorage.setItem("activeProfile", useremail.emailinput);
+  homeview();
+  home();
+  reloadwall();
+
+}
+
 var postmessage = function(formData){
 
   var content ={
     "post" : formData.post.value
   }  
   
-  serverstub.postMessage(localStorage.getItem("currentUser"), content.post, serverstub.getUserDataByToken(localStorage.getItem("currentUser")).email);
+  serverstub.postMessage(localStorage.getItem("currentUser"), content.post, serverstub.getUserDataByEmail(localStorage.getItem("currentUser"), localStorage.getItem("activeProfile")).data.email);
   alert("posted a message!");
 
 }
 
-
-function popdata(){
-  var user = serverstub.getUserDataByToken(localStorage.getItem("currentUser"));
+ 
+function popdata(email){
+  var user = serverstub.getUserDataByEmail(localStorage.getItem("currentUser"), email);
   document.getElementById("fn").innerHTML = user.data.firstname;
   document.getElementById("fmn").innerHTML = user.data.familyname;
   document.getElementById("gender1").innerHTML = user.data.gender;
@@ -190,9 +202,9 @@ function popdata(){
   document.getElementById("country1").innerHTML = user.data.country;
   document.getElementById("email2").innerHTML = user.data.email;
 
-  //borde skrivas om för att användas vid sökning på användare också
 
 }
+
 
 function home()
 {
@@ -219,24 +231,19 @@ function startview()
 {
   document.getElementById("startview").className = "show";
   document.getElementById("homeview").className = "hidden";
-  document.getElementById("browseview").className = "hidden";
 }
 
 function homeview()
 {
-  popdata();
+
+  popdata(localStorage.getItem("activeProfile"));
+
+  
   document.getElementById("startview").className = "hidden";
   document.getElementById("homeview").className =  "show";
-  document.getElementById("browseview").className =  "hidden";
 
 }
 
-function browseview()
-{
-  document.getElementById("startview").className = "hidden";
-  document.getElementById("homeview").className = "hidden";
-  document.getElementById("browseview").className = "show";
-}
 
 
 window.onload = function() {

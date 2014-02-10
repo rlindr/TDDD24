@@ -139,8 +139,8 @@
 								</tr>
 								<tr>
 								  <td colspan="5">
-								  	<form action="#" onsubmit="serverstub.getUserDataByEmail(this);return false;">
-								  		<input type="text" value="Write e-mail address" style="width:84%"> </input> 
+								  	<form action="#" onsubmit="finduser(this);return false;">
+								  		<input type="text" id="emailinput" value="Write e-mail address" style="width:84%"> </input> 
 								  		<input type="submit" value="Submit" style="width:14%; float:right">
 								  	</form>
 								  	</td>
@@ -180,39 +180,6 @@
 		</script>
 
 
-		<script id="friendBody" type=”text/view”>
-			<div id="browseview" align="center" class="hidden">
-				<div id="friendhome" class="show">
-							<table style="width:800px">
-								<tr>
-								  <th onclick="home()" bgcolor="#D3D3D3">Home</th>
-								  <th onclick="browse()">Browse</th>		
-								  <th onclick="account()">Account</th>
-								  </tr>
-								<tr>
-									<td colspan="5">
-										<label>First name: </label><p id="fn" value=""></p>
-										<label>Family name: </label><p id="fmn" value=""></p>
-										<label>Gender: </label><p id="g" value=""> </p>
-										<label>City: </label><p id="city" value=""> </p>
-										<label>Country: </label><p id="country" value=""> </p>
-										<label>Email: </label><p id="email" value=""> </p>	
-									</td>
-								</tr>
-								<tr>
-									<td colspan="5"><form action="#" onsubmit="serverstub.postMessage(this);return false;"><input type=text value="Write a message" style="width:84%"> </input> <input type=submit value="Post" style="width:14%; float:right"></form></td>
-								</tr>
-								<tr>
-									<td colspan="5">b1</td>
-								</tr>
-								<tr>
-									<td colspan="5"><form action="#" onsubmit="serverstub.getUserMessagesByEmail(this);return false;"> <input type=submit value="Reload wall" style="width:100%" > </input> </form></td>
-								</tr>
-							</table>
-						</div>
-					</div>
-		</script>
-
 		<style>
 		
 		table,th,td
@@ -230,7 +197,6 @@
     <body>
     <div id="welcomeView"></div>
     <div id="profileView"></div>
-	<div id="friendView"></div> 
 
     </body>
 </html>
