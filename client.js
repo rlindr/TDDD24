@@ -1,26 +1,27 @@
 
 
-
 function loadView(viewid){
+
   
   if(viewid==undefined){
 	document.getElementById("welcomeView").innerHTML = document.getElementById("welcomeBody").innerHTML;
 	startview();
   }
   
-  if(viewid==2){document.getElementById("profileView").innerHTML = document.getElementById("profileBody").innerHTML;
+  if(viewid!=undefined){document.getElementById("profileView").innerHTML = document.getElementById("profileBody").innerHTML;
   homeview();
   }
   
-  if(viewid==3){document.getElementById("friendView").innerHTML = document.getElementById("friendBody").innerHTML;
+/*  if(viewid==3){document.getElementById("friendView").innerHTML = document.getElementById("friendBody").innerHTML;
   browseview();
-  }
+  }*/
 }
 
 
 var logout = function(){
   var utloggad = serverstub.signOut(logedin); 
     if(utloggad.message = "Successfully signed out."){
+    localStorage.setItem("currentUser", undefined);
     loadView(undefined);
     }
     else{
@@ -56,7 +57,8 @@ var checksignin = function(formData){
 
           validid = serverstub.signIn(userid.email1,userid.password1);
           document.getElementById("in").innerHTML = validid.message;
-          loadView(2);
+          localStorage.setItem("currentUser", validid.data);
+          loadView(validid.data);
 
         }
 
@@ -136,12 +138,13 @@ var checksignup = function(formData){
   }
 
 function popdata(){
-  document.getElementById("fn").innerHTML = "Test";
-  document.getElementById("fmn").innerHTML = "test";
-  document.getElementById("gender1").innerHTML = "Test";
-  document.getElementById("city1").innerHTML = "Test";
-  document.getElementById("country1").innerHTML = "Test";
-  document.getElementById("email2").innerHTML = "Test";
+  var user = serverstub.getUserDataByToken(localStorage.getItem("currentUser"));
+  document.getElementById("fn").innerHTML = user.data.firstname;
+  document.getElementById("fmn").innerHTML = user.data.familyname;
+  document.getElementById("gender1").innerHTML = user.data.gender;
+  document.getElementById("city1").innerHTML = user.data.city;
+  document.getElementById("country1").innerHTML = user.data.country;
+  document.getElementById("email2").innerHTML = user.data.email;
 
 }
 
@@ -175,9 +178,11 @@ function startview()
 
 function homeview()
 {
+  popdata();
   document.getElementById("startview").className = "hidden";
   document.getElementById("homeview").className =  "show";
   document.getElementById("browseview").className =  "hidden";
+
 }
 
 function browseview()
