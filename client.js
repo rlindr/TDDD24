@@ -1,5 +1,6 @@
 
 
+
 function loadView(viewid){
 
   
@@ -19,7 +20,7 @@ function loadView(viewid){
 
 
 var logout = function(){
-  var utloggad = serverstub.signOut(logedin); 
+  var utloggad = serverstub.signOut(localStorage.getItem("currentUser")); 
     if(utloggad.message = "Successfully signed out."){
     localStorage.setItem("currentUser", undefined);
     loadView(undefined);
