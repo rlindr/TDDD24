@@ -55,13 +55,14 @@ var checksignin = function(formData){
           }
         else{
 
-          validid = serverstub.signIn(email1,password1);
+          validid = serverstub.signIn(userid.email1,userid.password1);
           document.getElementById("in").innerHTML = validid.message;
           logedin = validid.data;
+
         }
 
-        logedin=2;  //Vi kan ta bort denna sen, är bara en dummy variabel
-        loadView(); //Denna flyttas in ovan
+       // logedin=2;  //Vi kan ta bort denna sen, är bara en dummy variabel
+       // loadView(); //Denna flyttas in ovan
 
 }
 
