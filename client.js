@@ -57,12 +57,13 @@ var checksignin = function(formData){
 
           validid = serverstub.signIn(userid.email1,userid.password1);
           document.getElementById("in").innerHTML = validid.message;
-          logedin = validid.data;
+          logedin = 6;
+          loadView(logedin);
+          return false; //Denna flyttas in ovan
 
         }
 
-       // logedin=2;  //Vi kan ta bort denna sen, är bara en dummy variabel
-       // loadView(); //Denna flyttas in ovan
+       
 
 }
 
