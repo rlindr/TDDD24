@@ -1,23 +1,38 @@
 
 
-
-function loadView(viewid){
-
+function loadView(viewid){  
   
+  document.getElementById("welcomeView").innerHTML = document.getElementById("welcomeBody").innerHTML;
+  document.getElementById("profileView").innerHTML = document.getElementById("profileBody").innerHTML;
+  document.getElementById("friendView").innerHTML = document.getElementById("friendBody").innerHTML;
+
   if(viewid==undefined){
-	document.getElementById("welcomeView").innerHTML = document.getElementById("welcomeBody").innerHTML;
 	startview();
   }
   
-  if(viewid!=undefined){document.getElementById("profileView").innerHTML = document.getElementById("profileBody").innerHTML;
+  if(viewid!=undefined){
   homeview();
   }
   
-/*  if(viewid==3){document.getElementById("friendView").innerHTML = document.getElementById("friendBody").innerHTML;
+  if(viewid==3){
   browseview();
-  }*/
+  }
 }
 
+
+var changepassword = function(formData){
+
+var check ={
+
+          "oldPassword" : formData.oldPassword.value,
+          "newPassword" : formData.newPassword.value,
+          
+          }
+
+var result = serverstub.changePassword(localStorage.getItem("currentUser"), check.oldPassword, check.newPassword);
+alert(result.message);
+
+}
 
 var logout = function(){
   var utloggad = serverstub.signOut(localStorage.getItem("currentUser")); 
@@ -57,7 +72,7 @@ var checksignin = function(formData){
         else{
 
           validid = serverstub.signIn(userid.email1,userid.password1);
-          document.getElementById("in").innerHTML = validid.message;
+          alert(document.getElementById("in").innerHTML = validid.message);
           localStorage.setItem("currentUser", validid.data);
           loadView(validid.data);
 
@@ -138,6 +153,34 @@ var checksignup = function(formData){
     }
   }
 
+var reloadwall = function(){
+
+var messages = serverstub.getUserMessagesByToken(localStorage.getItem("currentUser")).data;
+
+document.getElementById("wall").innerHTML = "";
+
+for (var i=0;i<messages.length;i++)
+{
+
+document.getElementById("wall").innerHTML += messages[i].content + "<br>";
+
+}
+
+
+}
+
+var postmessage = function(formData){
+
+  var content ={
+    "post" : formData.post.value
+  }  
+  
+  serverstub.postMessage(localStorage.getItem("currentUser"), content.post, serverstub.getUserDataByToken(localStorage.getItem("currentUser")).email);
+  alert("posted a message!");
+
+}
+
+
 function popdata(){
   var user = serverstub.getUserDataByToken(localStorage.getItem("currentUser"));
   document.getElementById("fn").innerHTML = user.data.firstname;
@@ -146,6 +189,8 @@ function popdata(){
   document.getElementById("city1").innerHTML = user.data.city;
   document.getElementById("country1").innerHTML = user.data.country;
   document.getElementById("email2").innerHTML = user.data.email;
+
+  //borde skrivas om för att användas vid sökning på användare också
 
 }
 
