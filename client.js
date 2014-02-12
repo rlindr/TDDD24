@@ -73,6 +73,7 @@ var checksignin = function(formData){
           localStorage.setItem("currentUser", validid.data);
           localStorage.setItem("activeProfile", serverstub.getUserDataByToken(validid.data).data.email);
           loadView(validid.data);
+          reloadwall();
 
         }
 
@@ -160,7 +161,7 @@ document.getElementById("wall").innerHTML = "";
 for (var i=0;i<messages.length;i++)
 {
 
-document.getElementById("wall").innerHTML += messages[i].content + "<br>";
+document.getElementById("wall").innerHTML +=  messages[i].writer +  " " +  "says" + ":" + " " + messages[i].content + "<br>";
 
 }
 
@@ -188,7 +189,7 @@ var postmessage = function(formData){
   }  
   
   serverstub.postMessage(localStorage.getItem("currentUser"), content.post, serverstub.getUserDataByEmail(localStorage.getItem("currentUser"), localStorage.getItem("activeProfile")).data.email);
-  alert("posted a message!");
+  reloadwall();
 
 }
 
