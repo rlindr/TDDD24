@@ -8,6 +8,7 @@
 		
 
 		<script id="welcomeBody" type=”text/view”>
+			
 			<div id="startview" align="center" class="show">
 				<div class="container">
 					<div class="box1">
@@ -89,109 +90,127 @@
 		</script>
 
 		<script id="profileBody" type=”text/view”>
+			
 			<div id="homeview" align="center" class="hidden" action="#">
-				<div id="home" class="show">
-							<table style="width:800px">
-								<tr>
-								  <th onclick="home()" bgcolor="#D3D3D3">Home</th>
-								  <th onclick="browse()">Browse</th>		
-								  <th onclick="account()">Account</th>
-								  </tr>
-								<tr>
-									<td colspan="5">
-										<label>First name: </label><p id="fn" ></p>
-										<label>Family name: </label><p id="fmn" ></p>
-										<label>Gender: </label><p id="gender1" > </p>
-										<label>City: </label><p id="city1" > </p>
-										<label>Country: </label><p id="country1" > </p>
-										<label>Email: </label><p id="email2" > </p>	
-									</td>
-								</tr>
-								<tr>
-									<td colspan="5">
-									<form action="#" onsubmit="postmessage(this);return false;">
-									<input type="text" id="post" value="Write a message" style="width:84%"> </input> 
-									<input type="submit" value="Post" style="width:14%; float:right">
-									</form>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="5">
-										<div style="float:left" id="wall"></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="5"><form action="#" onsubmit="reloadwall();return false;"> 
-									<input type="submit" value="Reload wall" style="width:100%" > 
-									</input> 
-									</form>
-									</td>
-								</tr>
-							</table>
-						</div>
-
-						<div id="browse" class="hidden">
-							<table style="width:800px">
-								<tr>
-								  	<th onclick="home()">Home</th>
-								  	<th onclick="browse()" bgcolor="#D3D3D3">Browse</th>		
-								  	<th onclick="account()">Account</th>
-								</tr>
-								<tr>
-								  <td colspan="5">
-								  	<form action="#" onsubmit="finduser(this);return false;">
-								  		<input type="text" id="emailinput" value="Write e-mail address" style="width:84%"> </input> 
-								  		<input type="submit" value="Submit" style="width:14%; float:right">
-								  	</form>
-								  	</td>
-								</tr>
-							</table>
-						</div>
-
-
-						<div id="account" class="hidden">
-							<table style="width:800px">
-								<tr>
-								  	<th onclick="home()">Home</th>
-								  	<th onclick="browse()">Browse</th>		
-								  	<th onclick="account()" bgcolor="#D3D3D3">Account</th>
-								 </tr>
-									<tr>
-									 	<td colspan="5">
-									  	<form action="#" onsubmit="changepassword(this);return false;"> 
-										<label for="Oldpassword">Old password: </label>
-										<input id="oldPassword" type="password" style="width:85%;"></input>
-										<label for="Newpassword">New password: </label>
-										<input id="newPassword" type="password" style="width:85%;"> </input>
-										<input type="submit" value="Change password" style="width:100%" > </input> 
-										</form>
-										</td>
-									</tr>
-									<tr>
-									 	<td colspan="5">
-									  		<form onsubmit="logout(this);return false;">
-									  		<input type="submit" value="Log-out" style="width:100%">
-									  	</form>
-									 	</td>
-									</tr>
-							</table>
+				<div id="home" style="height:500px;width:600px;margin:100px;position:relative;border-style:solid;" class="show">
+					<div style="width:590px;height:20px;border-style:solid">
+						<div style="float:right">
+							<div id="tabstyle" onclick="home()">Home</div>
+							<div id="tabstyle" onclick="browse()"></div>
+							<div id="tabstyle" onclick="account()"></div>
+							<div id="tabstyle" onclick="home()"></div>
+							<div id="tabstyle" onclick="browse()" bgcolor="tabstyle">Browse</div>
+							<div id="tabstyle" onclick="account()"></div>
+							<div id="tabstyle" onclick="home()"></div>
+							<div id="tabstyle" onclick="browse()"></div>
+							<div id="tabstyle" onclick="account()">Account</div>
 						</div>
 					</div>
+					
+					<div style="float:left;width:180px;height:370px;border-style:solid">
+						<div style="float:left;border-style:solid">
+							<p style="font-weight:bold;margin:2px" id="name"></p>
+							<p style="margin:2px" id="location"></p>
+							<p style="margin:2px" id="email2"></p>
+						</div>
+					</div>
+					
+
+					<div style="float:right;width:400px;height:370px;border-style:solid">
+						<div>
+							<form action="#" onsubmit="postmessage(this);return false;">
+								<input type="text" id="post" placeholder="Write a message" style="float:left;width:84%"></input> 
+								<input type="submit" value="Post" style="width:14%;float:right">
+							</form>
+							
+							<form action="#" onsubmit="reloadwall();return false;"> 
+								<input type="submit" value="Reload wall" style="float:righ;width:100%" ></input> 
+							</form>
+						</div>
+						<div style="float:left" id="wall"></div>
+					</div>
+				</div>
+			
+
+				<div id="browse" style="height:500px;width:600px;margin:100px;position:relative;border-style:solid;" class="hidden">
+					<div style="width:590px;height:20px;border-style:solid">
+						<div style="float:right">
+							<div id="tabstyle" onclick="home()">Home</div>
+							<div id="tabstyle" onclick="browse()"></div>
+							<div id="tabstyle" onclick="account()"></div>
+							<div id="tabstyle" onclick="home()"></div>
+							<div id="tabstyle" onclick="browse()">Browse</div>
+							<div id="tabstyle" onclick="account()"></div>
+							<div id="tabstyle" onclick="home()"></div>
+							<div id="tabstyle" onclick="browse()"></div>
+							<div id="tabstyle" onclick="account()">Account</div>
+						</div>
+					</div>
+					<div style="width:590px;height:50px;border-style:solid">
+						<form action="#" onsubmit="finduser(this);return false;">
+							<input type="text" id="emailinput" placeholder="Write e-mail address" style="width:84%"> </input> 
+							<input type="submit" value="Submit" style="width:14%; float:right">
+						</form>
+					</div>
+				<!--<div style="float:left;width:180px;height:370px;border-style:solid">
+						<div style="float:left;border-style:solid">
+							<p style="font-weight:bold;margin:2px" id="name"></p>
+							<p style="margin:2px" id="location"></p>
+							<p style="margin:2px" id="email2"></p>
+						</div>
+					</div>
+						
+					<div style="float:right;width:400px;height:370px;border-style:solid">
+						<div>
+							<form action="#" onsubmit="postmessage(this);return false;">
+								<input type="text" id="post" placeholder="Write a message" style="float:left;width:84%"></input> 
+								<input type="submit" value="Post" style="width:14%;float:right">
+							</form>
+							<form action="#" onsubmit="reloadwall();return false;"> 
+								<input type="submit" value="Reload wall" style="float:righ;width:100%" ></input> 
+							</form>
+						</div>
+						<div style="float:left" id="wall"></div>
+					</div>-->
+				</div>
+
+
+				<div id="account" style="height:500px;width:600px;margin:100px;position:relative;border-style:solid;" class="hidden">
+					<div style="width:590px;height:20px;border-style:solid">
+						<div style="float:right">
+							<div id="tabstyle" onclick="home()">Home</div>
+							<div id="tabstyle" onclick="browse()"></div>
+							<div id="tabstyle" onclick="account()"></div>
+							<div id="tabstyle" onclick="home()"></div>
+							<div id="tabstyle" onclick="browse()">Browse</div>
+							<div id="tabstyle" onclick="account()"></div>
+							<div id="tabstyle" onclick="home()"></div>
+							<div id="tabstyle" onclick="browse()"></div>
+							<div id="tabstyle" onclick="account()">Account</div>
+						</div>
+					</div>
+					<div>
+						<form action="#" onsubmit="changepassword(this);return false;"> 
+							<label style="float:left" for="Oldpassword">Old password: </label>
+							<input id="oldPassword" type="password"></input><br>
+							<label style="float:left" for="Newpassword">New password: </label>
+							<input id="newPassword" type="password"></input>
+							<input type="submit" value="Change password" style="width:100%" > </input> 
+						</form>
+					</div>
+					<div>
+						<form onsubmit="logout(this);return false;">
+							<input type="submit" value="Log-out" style="width:100%">
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+				
 		</script>
 
-
-		<style>
-		
-		table,th,td
-		{
-		border:3px solid black;
-		border-collapse:collapse;
-		}
-		th,td
-		{
-		padding:5px;
-		}
-		</style>    
+  
 
 	</head>
     <body>

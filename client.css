@@ -7,6 +7,12 @@ position:relative;
 }
 
 
+#tabstyle{
+
+	float:left;
+	margin:3px;
+}
+
 .box1{
 background-color:red;
 height:400px;	

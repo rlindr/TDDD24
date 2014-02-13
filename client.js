@@ -16,6 +16,12 @@ function loadView(viewid){
 }
 
 
+var emailToName = function(email){
+
+
+
+}
+
 var changepassword = function(formData){
 
 var check ={
@@ -196,12 +202,18 @@ var postmessage = function(formData){
  
 function popdata(email){
   var user = serverstub.getUserDataByEmail(localStorage.getItem("currentUser"), email);
-  document.getElementById("fn").innerHTML = user.data.firstname;
+/*  document.getElementById("fn").innerHTML = user.data.firstname;
   document.getElementById("fmn").innerHTML = user.data.familyname;
   document.getElementById("gender1").innerHTML = user.data.gender;
   document.getElementById("city1").innerHTML = user.data.city;
   document.getElementById("country1").innerHTML = user.data.country;
+  document.getElementById("email2").innerHTML = user.data.email;*/
+
+  document.getElementById("name").innerHTML = user.data.firstname + " " + user.data.familyname + " " + "(" +  user.data.gender + ")";
+  document.getElementById("location").innerHTML = user.data.city + " " + user.data.country;
   document.getElementById("email2").innerHTML = user.data.email;
+
+
 
 
 }
@@ -236,10 +248,7 @@ function startview()
 
 function homeview()
 {
-
   popdata(localStorage.getItem("activeProfile"));
-
-  
   document.getElementById("startview").className = "hidden";
   document.getElementById("homeview").className =  "show";
 
