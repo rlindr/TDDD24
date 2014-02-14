@@ -61,15 +61,23 @@ var checksignin = function(formData){
 
         var error = ""
         if( document.getElementById("email1").value == "" || document.getElementById("password1").value == "") {
-          if(document.getElementById("email1").value == "") {
-           document.getElementById("email1").style.borderColor = "red";
-           error == "error";
-          }
-          
-          if(document.getElementById("password1").value == "") {
-            document.getElementById("password1").style.borderColor = "red";
-            error == "error";
-          }
+            if(document.getElementById("email1").value == "") {
+             document.getElementById("email1").style.borderColor = "red";
+             error == "error";
+            }
+            
+            if(document.getElementById("email1").value != "") {
+             document.getElementById("email1").style.borderColor = "initial";
+            }
+
+            if(document.getElementById("password1").value == "") {
+              document.getElementById("password1").style.borderColor = "red";
+              error == "error";
+            }
+
+            if(document.getElementById("password1").value != "") {
+              document.getElementById("password1").style.borderColor = "initial";
+            }
 
           }
         else{
@@ -105,46 +113,76 @@ var checksignup = function(formData){
         var error2 =""
 
         if(document.getElementById("firstname").value == "" || document.getElementById("familyname").value == "" ||  document.getElementById("city").value == "" || document.getElementById("country").value == "" ||  document.getElementById("email").value == "" || document.getElementById("password").value == "" || document.getElementById("repeatpsw").value == "" || (document.getElementById("password").value != document.getElementById("repeatpsw").value)) {
-        if(document.getElementById("firstname").value == "") {
-         document.getElementById("firstname").style.borderColor = "red";
-         error2 = "error";
-        }
-        
-        if(document.getElementById("familyname").value == "") {
-         document.getElementById("familyname").style.borderColor = "red";
-        error2 = "error";
-        }
+          if(document.getElementById("firstname").value == "") {
+           document.getElementById("firstname").style.borderColor = "red";
+           error2 = "error";
+          }
+          
+          if(document.getElementById("firstname").value != "") {
+           document.getElementById("firstname").style.borderColor = "initial";
+          }
 
-        if(document.getElementById("city").value == "") {
-         document.getElementById("city").style.borderColor = "red";
-               error2 = "error";
-        }
-        
-        if(document.getElementById("country").value == "") {
-         document.getElementById("country").style.borderColor = "red";
-               error2 = "error";
-        }
+          if(document.getElementById("familyname").value == "") {
+           document.getElementById("familyname").style.borderColor = "red";
+          error2 = "error";
+          }
 
-        if(document.getElementById("email").value == "") {
-         document.getElementById("email").style.borderColor = "red";
-               error2 = "error";
-        }
-        
-        if(document.getElementById("password").value == "") {
-         document.getElementById("password").style.borderColor = "red";
-               error2 = "error";
-        }
-        
-        if(document.getElementById("repeatpsw").value == "") {
-         document.getElementById("repeatpsw").style.borderColor = "red";
-               error2 = "error";
-        }
+          if(document.getElementById("familyname").value != "") {
+           document.getElementById("familyname").style.borderColor = "initial";
+          }
 
-        if(document.getElementById("password").value != document.getElementById("repeatpsw").value ) {
-          document.getElementById("repeatpsw").style.borderColor = "red";
+          if(document.getElementById("city").value == "") {
+           document.getElementById("city").style.borderColor = "red";
+                 error2 = "error";
+          }
+
+          if(document.getElementById("city").value != "") {
+           document.getElementById("city").style.borderColor = "initial";
+          }
+          
+          if(document.getElementById("country").value == "") {
+           document.getElementById("country").style.borderColor = "red";
+                 error2 = "error";
+          }
+
+          if(document.getElementById("country").value != "") {
+           document.getElementById("country").style.borderColor = "initial";
+          }
+
+          if(document.getElementById("email").value == "") {
+           document.getElementById("email").style.borderColor = "red";
+                 error2 = "error";
+          }
+          
+          if(document.getElementById("email").value != "") {
+           document.getElementById("email").style.borderColor = "initial";
+          }
+          
+          if(document.getElementById("password").value == "") {
            document.getElementById("password").style.borderColor = "red";
-               error2 = "error";
-        }
+                 error2 = "error";
+          }
+
+          if(document.getElementById("password").value != "") {
+           document.getElementById("password").style.borderColor = "initial";
+          }
+          
+          if(document.getElementById("repeatpsw").value == "") {
+           document.getElementById("repeatpsw").style.borderColor = "red";
+                 error2 = "error";
+          }
+
+          if(document.getElementById("repeatpsw").value != "") {
+           document.getElementById("repeatpsw").style.borderColor = "initial";
+          }
+
+          if(document.getElementById("password").value != document.getElementById("repeatpsw").value ) {
+            document.getElementById("repeatpsw").style.borderColor = "red";
+             document.getElementById("password").style.borderColor = "red";
+             document.getElementById("repeatpsw").value = "";
+             document.getElementById("password").value = "";
+                 error2 = "error";
+          }
 
     }
     else
