@@ -92,23 +92,23 @@
 		<script id="profileBody" type=”text/view”>
 			
 			<div id="homeview" align="center" class="hidden" action="#">
-				<div id="home" style="height:500px;width:600px;margin:100px;position:relative;border-style:solid;" class="show">
-					<div style="width:590px;height:20px;border-style:solid">
-						<div style="float:right">
-							<div id="tabstyle" onclick="home()">Home</div>
+				<div id="home" style="height:500px;width:600px;margin:100px;position:relative;border-style:solid; border-width:1px;" class="show">
+					<div style="height:20px; border-width:1px; border-bottom-style:solid;">
+						<div style="float:left">
+							<div id="tabstyle" onclick="home()" style="color:#4169E1">Home</div>
 							<div id="tabstyle" onclick="browse()"></div>
 							<div id="tabstyle" onclick="account()"></div>
-							<div id="tabstyle" onclick="home()"></div>
+							<div id="tabstyle" onclick="home()" style="color:#4169E1"></div>
 							<div id="tabstyle" onclick="browse()" bgcolor="tabstyle">Browse</div>
 							<div id="tabstyle" onclick="account()"></div>
-							<div id="tabstyle" onclick="home()"></div>
+							<div id="tabstyle" onclick="home()" style="color:#4169E1"></div>
 							<div id="tabstyle" onclick="browse()"></div>
 							<div id="tabstyle" onclick="account()">Account</div>
 						</div>
 					</div>
 					
-					<div style="float:left;width:180px;height:370px;border-style:solid">
-						<div style="float:left;border-style:solid">
+					<div>
+						<div style="border-width:1px; border-bottom-style:solid;">
 							<p style="font-weight:bold;margin:2px" id="name"></p>
 							<p style="margin:2px" id="location"></p>
 							<p style="margin:2px" id="email2"></p>
@@ -116,8 +116,8 @@
 					</div>
 					
 
-					<div style="float:right;width:400px;height:370px;border-style:solid">
-						<div>
+					<div style="border-width:1px; border-bottom-style:solid;">
+						<div style="border-width:1px; border-bottom-style:solid;">
 							<form action="#" onsubmit="postmessage(this);return false;">
 								<input type="text" id="post" placeholder="Write a message" style="float:left;width:84%"></input> 
 								<input type="submit" value="Post" style="width:14%;float:right">
@@ -127,40 +127,40 @@
 								<input type="submit" value="Reload wall" style="float:righ;width:100%" ></input> 
 							</form>
 						</div>
-						<div style="float:left" id="wall"></div>
+						<div id="wall"></div>
 					</div>
 				</div>
 			
 
-				<div id="browse" style="height:500px;width:600px;margin:100px;position:relative;border-style:solid;" class="hidden">
-					<div style="width:590px;height:20px;border-style:solid">
-						<div style="float:right">
+				<div id="browse" style="height:500px;width:600px;margin:100px;position:relative;border-style:solid;border-width:1px;" class="hidden">
+					<div style="height:20px;border-width:1px; border-bottom-style:solid;">
+						<div style="float:left">
 							<div id="tabstyle" onclick="home()">Home</div>
-							<div id="tabstyle" onclick="browse()"></div>
+							<div id="tabstyle" onclick="browse()" style="color:#4169E1"></div>
 							<div id="tabstyle" onclick="account()"></div>
 							<div id="tabstyle" onclick="home()"></div>
-							<div id="tabstyle" onclick="browse()">Browse</div>
+							<div id="tabstyle" onclick="browse()" style="color:#4169E1">Browse</div>
 							<div id="tabstyle" onclick="account()"></div>
 							<div id="tabstyle" onclick="home()"></div>
-							<div id="tabstyle" onclick="browse()"></div>
+							<div id="tabstyle" onclick="browse()" style="color:#4169E1"></div>
 							<div id="tabstyle" onclick="account()">Account</div>
 						</div>
 					</div>
-					<div style="width:590px;height:50px;border-style:solid">
+					<div style="border-width:1px; border-bottom-style:solid;">
 						<form action="#" onsubmit="finduser(this);return false;">
 							<input type="text" id="emailinput" placeholder="Write e-mail address" style="width:84%"> </input> 
 							<input type="submit" value="Submit" style="width:14%; float:right">
 						</form>
 					</div>
-				<!--<div style="float:left;width:180px;height:370px;border-style:solid">
-						<div style="float:left;border-style:solid">
+				<!--<div style="float:left;width:180px;height:370px;border-width:1px;">
+						<div style="float:left;border-style:solid;border-width:1px;">
 							<p style="font-weight:bold;margin:2px" id="name"></p>
 							<p style="margin:2px" id="location"></p>
 							<p style="margin:2px" id="email2"></p>
 						</div>
 					</div>
 						
-					<div style="float:right;width:400px;height:370px;border-style:solid">
+					<div style="float:right;width:400px;height:370px;border-width:1px;">
 						<div>
 							<form action="#" onsubmit="postmessage(this);return false;">
 								<input type="text" id="post" placeholder="Write a message" style="float:left;width:84%"></input> 
@@ -175,30 +175,34 @@
 				</div>
 
 
-				<div id="account" style="height:500px;width:600px;margin:100px;position:relative;border-style:solid;" class="hidden">
-					<div style="width:590px;height:20px;border-style:solid">
-						<div style="float:right">
+				<div id="account" style="height:500px;width:600px;margin:100px;position:relative;border-style:solid;border-width:1px;" class="hidden">
+					<div style="height:20px;border-width:1px; border-bottom-style:solid;">
+						<div style="float:left">
 							<div id="tabstyle" onclick="home()">Home</div>
 							<div id="tabstyle" onclick="browse()"></div>
-							<div id="tabstyle" onclick="account()"></div>
+							<div id="tabstyle" onclick="account()" style="color:#4169E1"></div>
 							<div id="tabstyle" onclick="home()"></div>
 							<div id="tabstyle" onclick="browse()">Browse</div>
-							<div id="tabstyle" onclick="account()"></div>
+							<div id="tabstyle" onclick="account()" style="color:#4169E1"></div>
 							<div id="tabstyle" onclick="home()"></div>
 							<div id="tabstyle" onclick="browse()"></div>
-							<div id="tabstyle" onclick="account()">Account</div>
+							<div id="tabstyle" onclick="account()" style="color:#4169E1">Account</div>
 						</div>
 					</div>
-					<div>
+					<div >
 						<form action="#" onsubmit="changepassword(this);return false;"> 
-							<label style="float:left" for="Oldpassword">Old password: </label>
-							<input id="oldPassword" type="password"></input><br>
-							<label style="float:left" for="Newpassword">New password: </label>
-							<input id="newPassword" type="password"></input>
-							<input type="submit" value="Change password" style="width:100%" > </input> 
+							<div class ="blck2">
+							<label for="Oldpassword">Old password: </label>
+							<input id="oldPassword" type="password" style="width:50%;position:absolute;right:0px;" ></input><br>
+							</div>
+							<div class ="blck2">
+							<label for="Newpassword">New password: </label>
+							<input id="newPassword" type="password" style="width:50%; position:absolute;right:0px;"></input><br>
+							</div>
+							<input type="submit" value="Change password" style="width:100%; padding-top:15%;" > </input> 
 						</form>
 					</div>
-					<div>
+					<div style="border-width:1px; border-bottom-style:solid;">
 						<form onsubmit="logout(this);return false;">
 							<input type="submit" value="Log-out" style="width:100%">
 						</form>

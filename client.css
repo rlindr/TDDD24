@@ -53,9 +53,10 @@ float:right;
 }
 
 .blck label{
-	display: inline-block; width: 117px; text-align: left;
-	
-}
+	display: inline-block; width: 117px; text-align: left;}
+
+.blck2 label{
+	display:inline-block; width:50%; position:absolute;left:0px;}
 
 .hidden {display:none;}
 .show {visibility: visible}
