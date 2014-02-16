@@ -101,7 +101,7 @@
 							<div id="tabstyle" onclick="browse()"></div>
 							<div id="tabstyle" onclick="account()"></div>
 							<div id="tabstyle" onclick="home()" style="color:#4169E1"></div>
-							<div id="tabstyle" onclick="browse()" bgcolor="tabstyle">Browse</div>
+							<div id="tabstyle" onclick="browse()">Browse</div>
 							<div id="tabstyle" onclick="account()"></div>
 							<div id="tabstyle" onclick="home()" style="color:#4169E1"></div>
 							<div id="tabstyle" onclick="browse()"></div>
@@ -109,16 +109,18 @@
 						</div>
 					</div>
 					
+					
 					<div>
-						<div style="border-width:1px; border-bottom-style:solid;">
-							<p style="font-weight:bold;margin:2px" id="name"></p>
-							<p style="margin:2px" id="location"></p>
-							<p style="margin:2px" id="email2"></p>
-						</div>
+						<br>
+						<p style="font-weight:bold;margin:2px" id="name"></p>
+						<p style="margin:2px" id="location"></p>
+						<p style="margin:2px" id="email2"></p>
+						<br>
 					</div>
 					
+					
 
-					<div style="border-width:1px; border-bottom-style:solid;">
+					<div style="border-width:1px;border-bottom-style:solid;">
 						<div style="border-width:1px; border-bottom-style:solid;">
 							<form action="#" onsubmit="postmessage(this);return false;">
 								<input type="text" id="post" placeholder="Write a message" style="float:left;width:84%"></input> 
@@ -129,7 +131,7 @@
 								<input type="submit" value="Reload wall" style="float:righ;width:100%" ></input> 
 							</form>
 						</div>
-						<div id="wall"></div>
+						<div style="text-align:left;height:335px;overflow:scroll;" id="wall"></div>
 					</div>
 				</div>
 			
@@ -191,20 +193,22 @@
 							<div id="tabstyle" onclick="account()" style="color:#4169E1">Account</div>
 						</div>
 					</div>
-					<div >
+
+
+					<div>
+					<br>
 						<form action="#" onsubmit="changepassword(this);return false;"> 
 							<div class ="blck2">
 							<label for="Oldpassword">Old password: </label>
-							<input id="oldPassword" type="password" style="width:50%;position:absolute;right:0px;" ></input><br>
+							<input id="oldPassword" type="password" style="width:50%;" ></input><br>
 							</div>
 							<div class ="blck2">
 							<label for="Newpassword">New password: </label>
-							<input id="newPassword" type="password" style="width:50%; position:absolute;right:0px;"></input><br>
+							<input id="newPassword" type="password" style="width:50%;"></input><br>
 							</div>
+							<br>
 							<input type="submit" value="Change password" style="width:100%; padding-top:15%;" > </input> 
 						</form>
-					</div>
-					<div style="border-width:1px; border-bottom-style:solid;">
 						<form onsubmit="logout(this);return false;">
 							<input type="submit" value="Log-out" style="width:100%">
 						</form>
