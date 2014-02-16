@@ -16,7 +16,7 @@
 
 					</div>
 					<div class="box2">
-			    		<form name="sign-in" action="#" onsubmit="checksignin(this);return false;" >
+			    		<form name="sign-in" action="#" onsubmit="checksignin(this);return false;" onchange="retype();return false;">
 							<div class ="blck">
 							<label for="email1">Email</label>
 							<input type="text" id="email1" ><br>
@@ -31,12 +31,12 @@
 						</form><br>
 						</div>
 					</div>
-					<div class="box3">
+					<div class="box3" >
 						
 						<div class ="blck">
 						<h3 align="center" style="margin:5px;">Sign up here</h3>
 						</div>
-						<form name="signupform" action="#" onsubmit="checksignup(this);return false;"> 
+						<form name="signupform" action="#" onsubmit="checksignup(this);return false;" onchange="retype();return false;"> 
 						
 						<div class ="blck">
 						<label  for="firstname">First name</label>
