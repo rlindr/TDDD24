@@ -12,22 +12,26 @@
 			<div id="startview" align="center" class="show">
 				<div class="container">
 					<div class="box1">
-						<img src="wimage.png">
+						<img src="wimage.png" style="height:398px; width:338px;">
 
 					</div>
 					<div class="box2">
-			    		<form name="sign-in" action="#" onsubmit="checksignin(this);return false;" onchange="retype();return false;">
-							<div class ="blck">
-							<label for="email1">Email</label>
-							<input type="text" id="email1" ><br>
+			    		<form name="sign-in" action="#" onsubmit="checksignin(this);return false;" onkeypress="retype();">
+							<div>
+							<span style="display: block; overflow: hidden;">
+							<label for="email1" style="margin-left:5px; float:left;">Email</label>
+							<input type="text" style="margin-right:5px; float:right;" id="email1" ><br>
+							<span>
 							</div>
-							<div class ="blck">
-							<label for="password1">Password</label>
-							<input type="password" id="password1"><br>
+							<div>
+							<span style="display: block; overflow: hidden;">
+							<label for="password1" style="margin-left:5px; float:left;">Password</label>
+							<input type="password" style="margin-right:5px; float:right;" id="password1"><br>
+							</span>
 							</div>
 						<div class ="blck">
 						<div style="float:left;" id="in"></div>
-						<button style="float:right;" type="login">LogIn</button>
+						<button style="float:right; margin-right:5px;" type="login">LogIn</button>
 						</form><br>
 						</div>
 					</div>
@@ -36,53 +40,70 @@
 						<div class ="blck">
 						<h3 align="center" style="margin:5px;">Sign up here</h3>
 						</div>
-						<form name="signupform" action="#" onsubmit="checksignup(this);return false;" onchange="retype();return false;"> 
+						<form name="signupform" action="#" onsubmit="checksignup(this);return false;" onkeypress="retype();"> 
 						
-						<div class ="blck">
-						<label  for="firstname">First name</label>
-						<input  type="text" id="firstname"><br>
+						<div>
+						<span style="display: block; overflow: hidden;">
+						<label  for="firstname" style="margin-left:5px; float:left;">First name</label>
+						<input  type="text" style="margin-right:5px; float:right;" id="firstname"><br>
+						</span>
 						</div>
 						
-						<div class ="blck">
-						<label  for="familyname">Family name</label>
-						<input  type="text" id="familyname"><br>
+						<div>
+						<span style="display: block; overflow: hidden;">
+						<label  for="familyname" style="margin-left:5px; float:left;">Family name</label>
+						<input  type="text" style="margin-right:5px; float:right;" id="familyname"><br>
+						</span>
 						</div>
 						
-						<div class ="blck">
-						<label for="gender">Gender</label>
-						<select id="gender" style= "width:126px" >
+						<div>
+						<span style="display: block; overflow: hidden;">
+						<label for="gender" style="margin-left:5px; float:left;">Gender</label>
+						<select id="gender" style="margin-right:5px; float:right; width:126px;" >
 						  <option value="male">Male</option>
 						  <option value="female">Female</option>
-						</select>
+						</select><br>
+						</span>
 						</div>
 						
-						<div class ="blck">	
-						<label for="city">City</label>
-						<input type="text" id="city"><br>
+						<div>
+						<span style="display: block; overflow: hidden;">	
+						<label for="city" style="margin-left:5px; float:left;">City</label>
+						<input type="text" style="margin-right:5px; float:right;" id="city"><br>
+						</span>
 						</div>
 						
-						<div class ="blck">
-						<label for="country">Country</label>
-						<input type="text" id="country"><br>
+						<div>
+						<span style="display: block; overflow: hidden;">
+						<label for="country" style="margin-left:5px; float:left;">Country</label>
+						<input type="text" style="margin-right:5px; float:right;" id="country"><br>
+						</span>
 						</div>
 						
-						<div class ="blck">
-						<label for="mail">Email</label>
-						<input type="text" id="email"><br>
+						<div >
+						<span style="display: block; overflow: hidden;">
+						<label for="mail" style="margin-left:5px; float:left;">Email</label>
+						<input type="text" style="margin-right:5px; float:right;" id="email"><br>
+						</span>
 						</div>
 						
-						<div class ="blck">
-						<label for="password">Password</label>
-						<input type="password" id="password"><br>
+						<div >
+						<span style="display: block; overflow: hidden;">
+						<label for="password" style="margin-left:5px; float:left;">Password</label>
+						<input type="password" style="margin-right:5px; float:right;" id="password"><br>
+						</span>
 						</div>
 						
-						<div class ="blck">
-						<label for="repeatpsw">Repeat PSW</label>
-						<input type="password" id="repeatpsw"><br>
+						<div >
+						<span style="display: block; overflow: hidden;">
+						<label for="repeatpsw" style="margin-left:5px; float:left;">Repeat PSW</label>
+						<input type="password" style="margin-right:5px; float:right;" id="repeatpsw"><br>
+						</span>
 						</div>
+						
 						<div class ="blck">
 						<div style="float:left;" id="up"></div>
-						<button style="float:right;" type="submit">SignUp</button>
+						<button style="float:right; margin-right:5px;" type="submit">SignUp</button>
 						</div>
 						
 						</form>		
@@ -223,7 +244,7 @@
   
 
 	</head>
-    <body>
+    <body >
     <div id="welcomeView"></div>
     <div id="profileView"></div>
 

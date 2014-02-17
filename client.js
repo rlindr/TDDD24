@@ -1,10 +1,9 @@
 
-
 function loadView(viewid){  
   
   document.getElementById("welcomeView").innerHTML = document.getElementById("welcomeBody").innerHTML;
   document.getElementById("profileView").innerHTML = document.getElementById("profileBody").innerHTML;
-
+  viewid = localStorage.test;
   if(viewid==undefined){
 	startview();
   }
@@ -31,9 +30,22 @@ var check ={
           
           }
 
-var result = serverstub.changePassword(localStorage.getItem("currentUser"), check.oldPassword, check.newPassword);
-alert(result.message);
+          if(check.oldPassword == "" || check.newPassword == "" ){
 
+            if(check.oldPassword == "" ){
+              alert("You have to write your old password");
+            }
+
+            if(check.newPassword == "" ){
+              alert("You have to write a new password");
+            }
+
+          }
+          else{
+
+          var result = serverstub.changePassword(localStorage.getItem("currentUser"), check.oldPassword, check.newPassword);
+          alert(result.message);
+          }
 }
 
 var logout = function(){
@@ -41,6 +53,7 @@ var logout = function(){
     if(utloggad.message = "Successfully signed out."){
     localStorage.setItem("currentUser", undefined);
     localStorage.setItem("activeProfile", undefined);    
+    localStorage.test = "undefined";
     loadView(undefined);
     }
     else{
@@ -117,7 +130,7 @@ var checksignin = function(formData){
         if( document.getElementById("email1").value == "" || document.getElementById("password1").value == "") {
             if(document.getElementById("email1").value == "") {
              document.getElementById("email1").style.borderColor = "red";
-
+             alert("You have to write an email-adress as user name");
             }
             
             if(document.getElementById("email1").value != "") {
@@ -126,6 +139,7 @@ var checksignin = function(formData){
 
             if(document.getElementById("password1").value == "") {
               document.getElementById("password1").style.borderColor = "red";
+              alert("You have to write a password");
 
             }
 
@@ -140,6 +154,7 @@ var checksignin = function(formData){
           alert(document.getElementById("in").innerHTML = validid.message);
           localStorage.setItem("currentUser", validid.data);
           localStorage.setItem("activeProfile", serverstub.getUserDataByToken(validid.data).data.email);
+          localStorage.test = validid.data;
           loadView(validid.data);
           reloadwall();
 
@@ -168,6 +183,7 @@ var checksignup = function(formData){
         if(document.getElementById("firstname").value == "" || document.getElementById("familyname").value == "" ||  document.getElementById("city").value == "" || document.getElementById("country").value == "" ||  document.getElementById("email").value == "" || document.getElementById("password").value == "" || document.getElementById("repeatpsw").value == "" || (document.getElementById("password").value != document.getElementById("repeatpsw").value)) {
           if(document.getElementById("firstname").value == "") {
            document.getElementById("firstname").style.borderColor = "red";
+           alert("You have to write a first name");
           }
           
           if(document.getElementById("firstname").value != "") {
@@ -176,6 +192,7 @@ var checksignup = function(formData){
 
           if(document.getElementById("familyname").value == "") {
            document.getElementById("familyname").style.borderColor = "red";
+          alert("You have to write a familyname");
           }
 
           if(document.getElementById("familyname").value != "") {
@@ -184,6 +201,7 @@ var checksignup = function(formData){
 
           if(document.getElementById("city").value == "") {
            document.getElementById("city").style.borderColor = "red";
+          alert("You have to write a city");
           }
 
           if(document.getElementById("city").value != "") {
@@ -192,6 +210,7 @@ var checksignup = function(formData){
           
           if(document.getElementById("country").value == "") {
            document.getElementById("country").style.borderColor = "red";
+          alert("You have to write a country");
           }
 
           if(document.getElementById("country").value != "") {
@@ -200,6 +219,7 @@ var checksignup = function(formData){
 
           if(document.getElementById("email").value == "") {
            document.getElementById("email").style.borderColor = "red";
+          alert("You have to write an email");
               
           }
           
@@ -209,6 +229,7 @@ var checksignup = function(formData){
           
           if(document.getElementById("password").value == "") {
            document.getElementById("password").style.borderColor = "red";
+           alert("You have to write a password");
               
           }
 
@@ -218,6 +239,7 @@ var checksignup = function(formData){
           
           if(document.getElementById("repeatpsw").value == "") {
            document.getElementById("repeatpsw").style.borderColor = "red";
+           alert("You have to repeat the password");
                  
           }
 
@@ -230,7 +252,7 @@ var checksignup = function(formData){
              document.getElementById("password").style.borderColor = "red";
              document.getElementById("repeatpsw").value = "";
              document.getElementById("password").value = "";
-                
+            alert("You have to write the same password");
           }
 
     }
@@ -240,7 +262,13 @@ var checksignup = function(formData){
 
       var result = serverstub.signUp(user);
       document.getElementById("up").innerHTML = result.message;
-
+      document.getElementById("firstname").value = "" ;
+      document.getElementById("familyname").value = "" ;  
+      document.getElementById("city").value = ""; 
+      document.getElementById("country").value = "" ;
+      document.getElementById("email").value = "" ;
+      document.getElementById("password").value = "" ;
+      document.getElementById("repeatpsw").value = "" ;
 
     }
   }
@@ -327,6 +355,8 @@ function account()
   document.getElementById("account").className = "show";
 }
 
+
+
 function startview()
 {
   document.getElementById("startview").className = "show";
@@ -342,8 +372,10 @@ function homeview()
 }
 
 
-
 window.onload = function() {
-  loadView();
+  loadView(localStorage.test);
 }
+
+
+
 
