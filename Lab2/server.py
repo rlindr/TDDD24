@@ -73,7 +73,7 @@ def sign_in():
         db = get_db()
         db.execute('UPDATE user_info SET token=? WHERE email=? AND password=? ' , [token1, email1, password1])
         db.commit()
-        return 'traff'
+        return 'You are signed-in'
 
 
 @app.route('/signup', methods=['POST'])
@@ -88,41 +88,77 @@ def sign_up():
     db = get_db()
     db.execute('insert into user_info (firstname, familyname, gender, city, country, email, password) values (?,?,?,?,?,?,?)', [firstname, familyname, gender, city, country, email, password])
     db.commit()
-    return "works"
+    return "You are now signed-up"
    
 @app.route('/changepassword', methods=['POST'])
 def change_password():
-    #token = request.args.get('token')
     token1 = request.args.get('token')
     oldPassword = request.args.get('oldPassword')
     newPassword = request.args.get('newPassword')
     db = get_db()
-    db.execute('UPDATE user_info SET password=? WHERE firstname=?', [newPassword, token1])
+    db.execute('UPDATE user_info SET password=? WHERE token=?', [newPassword, token1])
     db.commit()
-    return "works2"
+    return "You have now changed your password"
    
-#@app.route('/signin') 
-#def sign_in():
+@app.route('/signout', methods=['POST'])
+def sign_out():
+    #how to handle the token?
+    return "You have now signed-out"
 
-#@app.route('/signout')
-#def sign_out():
-#
+@app.route('/getuserdatabytoken', methods=['POST', 'GET'])
+def get_user_data_by_token():
+    token1 = request.args.get('token')
+    user = query_db('SELECT email,firstname, familyname, gender, city, country FROM user_info WHERE token=?',[token1], one=True)
+    if user is None:
+        return 'No such user'
+    else:
+        return ",".join(user)
 
-#@app.route('/getuserdatabytoken')
-#def get_user_data_by_token():
-#
-#@app.route('/getuserdatabyemail')
-#def get_user_data_by_email():
-#
-#@app.route('/getusermessagesbytoken')
-#def get_user_messages_by_token():
-#
-#@app.route('/getusermessagesbyemail')
-#def get_user_messages_by_email():      
-#      
-#@app.route('/postmessage')
-#def post_message():  
+@app.route('/getuserdatabyemail', methods=['POST', 'GET'])
+def get_user_data_by_email():
+    email = request.args.get('email') 
+    user = query_db('SELECT email,firstname, familyname, gender, city, country FROM user_info WHERE email=?',[email], one=True)
+    if user is None:
+        return 'No such user'
+    else:
+        return ",".join(user)
 
+@app.route('/postmessage', methods=['POST'])
+def post_message():
+    token = request.args.get('token')
+    email = request.args.get('email')
+    message = request.args.get('message')
+    au = query_db('SELECT email FROM user_info WHERE token=?',[token], one=True)
+    db = get_db()
+    db.execute('UPDATE messanges SET author= ?, receiver= ?, message=?', [au, email, message])
+    db.commit()
+    au = query_db('SELECT * FROM messanges', one=True)
+    if au is None:
+        return 'No'
+    else:
+        return ",".join(au)
+    
+@app.route('/getusermessagesbytoken', methods=['POST'])
+def get_user_messages_by_token():
+    token = request.args.get('token')
+    re = query_db('SELECT email FROM user_info WHERE token=?',[token], one=True)
+    mes = query_db('SELECT message FROM messanges WHERE receiver=?',[re], one=True)
+    if mes is None:
+        return 'No messages'
+    else:
+        return ",".join(mes)
+
+@app.route('/getusermessagesbyemail', methods=['POST'])
+def get_user_messages_by_email():
+    token = request.args.get('token')
+    email = request.args.get('email')
+    re = query_db('SELECT email FROM user_info WHERE token=? AND email=?',[token, email], one=True)
+    mes = query_db('SELECT message FROM messanges WHERE receiver=?',[re], one=True)
+    if mes is None:
+        return 'No messages'
+    else:
+        return ",".join(mes)
+    
 
 if __name__ == '__main__':
     app.run()

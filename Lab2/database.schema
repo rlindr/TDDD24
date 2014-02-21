@@ -11,3 +11,10 @@ password VARCHAR(30),
 token VARCHAR(30)
 );
 
+drop table if exists messanges;
+CREATE TABLE messanges(
+id integer primary key autoincrement,
+author VARCHAR(30),
+receiver VARCHAR(30),
+message VARCHAR(30)
+);
