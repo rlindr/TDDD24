@@ -50,22 +50,30 @@ def close_db(error):
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
 
-@app.route('/add')
-def add_entry():
-    db = get_db()
-    db.execute("insert into user_info values ('1','L','D','Man','H','S','Mhotmail','oo');")
-    db.commit()
-    return('New entry was successfully posted')
-
-@app.route('/gt')
-def gt():
-    for user in query_db('select * from user_info'):
-        return user['firstname']    
-
 
 @app.route('/getpersonbyid', methods=['GET'])
 def getPersonById():
     return request.args.get('personId')
+
+def query_db(query, args=(), one=False):
+    cur = get_db().execute(query, args)
+    rv = cur.fetchall()
+    cur.close()
+    return (rv[0] if rv else None) if one else rv
+
+@app.route('/signin', methods=['POST']) 
+def sign_in():
+    email1 = request.args.get('email')
+    password1 = request.args.get('password')
+    token1 = request.args.get('token')
+    user = query_db('SELECT email,password FROM user_info WHERE email=? AND password=?',[email1,password1], one=True)
+    if user is None:
+        return 'No such user'
+    else:
+        db = get_db()
+        db.execute('UPDATE user_info SET token=? WHERE email=? AND password=? ' , [token1, email1, password1])
+        db.commit()
+        return 'traff'
 
 
 @app.route('/signup', methods=['POST'])
@@ -82,15 +90,24 @@ def sign_up():
     db.commit()
     return "works"
    
-@app.route('/signin') 
-def sign_in():
+@app.route('/changepassword', methods=['POST'])
+def change_password():
+    #token = request.args.get('token')
+    token1 = request.args.get('token')
+    oldPassword = request.args.get('oldPassword')
+    newPassword = request.args.get('newPassword')
+    db = get_db()
+    db.execute('UPDATE user_info SET password=? WHERE firstname=?', [newPassword, token1])
+    db.commit()
+    return "works2"
+   
+#@app.route('/signin') 
+#def sign_in():
 
 #@app.route('/signout')
 #def sign_out():
 #
-#@app.route('/changepassword')
-#def change_password():
-#
+
 #@app.route('/getuserdatabytoken')
 #def get_user_data_by_token():
 #
