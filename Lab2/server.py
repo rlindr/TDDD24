@@ -2,7 +2,8 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 import sqlite3
 import os
-
+import random
+import string
 
 
 # create our little application :)
@@ -50,22 +51,19 @@ def close_db(error):
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
 
-
-@app.route('/getpersonbyid', methods=['GET'])
-def getPersonById():
-    return request.args.get('personId')
-
 def query_db(query, args=(), one=False):
     cur = get_db().execute(query, args)
     rv = cur.fetchall()
     cur.close()
     return (rv[0] if rv else None) if one else rv
 
-@app.route('/signin', methods=['POST']) 
+@app.route('/signin', methods=['POST', 'GET']) 
 def sign_in():
     email1 = request.args.get('email')
     password1 = request.args.get('password')
-    token1 = request.args.get('token')
+    length = 20
+    generated_token = string.ascii_uppercase + string.digits +string.ascii_lowercase 
+    token1 = ''.join(random.choice(generated_token) for i in range(length))
     user = query_db('SELECT email,password FROM user_info WHERE email=? AND password=?',[email1,password1], one=True)
     if user is None:
         return 'No such user'
@@ -73,7 +71,7 @@ def sign_in():
         db = get_db()
         db.execute('UPDATE user_info SET token=? WHERE email=? AND password=? ' , [token1, email1, password1])
         db.commit()
-        return 'You are signed-in'
+        return token1
 
 
 @app.route('/signup', methods=['POST'])
@@ -102,7 +100,11 @@ def change_password():
    
 @app.route('/signout', methods=['POST'])
 def sign_out():
-    #how to handle the token?
+    token1 = request.args.get('token')
+    tokreset = 'null'
+    db = get_db()
+    db.execute('UPDATE user_info SET token=? WHERE token1=?' , [tokreset, token1])
+    db.commit()
     return "You have now signed-out"
 
 @app.route('/getuserdatabytoken', methods=['POST', 'GET'])
@@ -129,31 +131,28 @@ def post_message():
     email = request.args.get('email')
     message = request.args.get('message')
     au = query_db('SELECT email FROM user_info WHERE token=?',[token], one=True)
+    au = ",".join(au) 
     db = get_db()
-    db.execute('UPDATE messanges SET author= ?, receiver= ?, message=?', [au, email, message])
+    db.execute('insert into messanges(author, receiver, message) values (?,?,?)', [au, email, message])
     db.commit()
-    au = query_db('SELECT * FROM messanges', one=True)
-    if au is None:
-        return 'No'
-    else:
-        return ",".join(au)
+    return "You have posted a message"
     
-@app.route('/getusermessagesbytoken', methods=['POST'])
+@app.route('/getusermessagesbytoken', methods=['POST', 'GET'])
 def get_user_messages_by_token():
     token = request.args.get('token')
     re = query_db('SELECT email FROM user_info WHERE token=?',[token], one=True)
+    re = ",".join(re) 
     mes = query_db('SELECT message FROM messanges WHERE receiver=?',[re], one=True)
     if mes is None:
         return 'No messages'
     else:
         return ",".join(mes)
 
-@app.route('/getusermessagesbyemail', methods=['POST'])
+@app.route('/getusermessagesbyemail', methods=['POST', 'GET'])
 def get_user_messages_by_email():
     token = request.args.get('token')
     email = request.args.get('email')
-    re = query_db('SELECT email FROM user_info WHERE token=? AND email=?',[token, email], one=True)
-    mes = query_db('SELECT message FROM messanges WHERE receiver=?',[re], one=True)
+    mes = query_db('SELECT message FROM messanges WHERE receiver=?',[email], one=True)
     if mes is None:
         return 'No messages'
     else:
