@@ -4,6 +4,7 @@ import sqlite3
 import os
 import random
 import string
+import sys
 
 
 # create our little application :)
@@ -21,7 +22,6 @@ app.config.update(dict(
     PASSWORD='default'
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
-
 
 
 def connect_db():
@@ -59,7 +59,64 @@ def query_db(query, args=(), one=False):
     return (rv[0] if rv else None) if one else rv
 
 
-def sign_up(firstname,familyname,gender,city, country, email, password):
+def sign_up(firstname,familyname,gender,city,country,email,password):
+    user = query_db('SELECT email FROM user_info WHERE email=?',[email])
+    if user is None:
+        return 'There is already an user registered with that username'
+    else:
+        db = get_db()
+        db.execute('insert into user_info (firstname, familyname, gender, city, country, email, password) values (?,?,?,?,?,?,?)', [firstname, familyname, gender, city, country, email, password])
+        db.commit()
+        
+def sign_in(email1,password1,token1):
+    user = query_db('SELECT email,password FROM user_info WHERE email=? AND password=?',[email1,password1])
+    if user == None:
+        return 'No such user registered in the database'
+    else:
+        db = get_db()
+        db.execute('UPDATE user_info SET token=? WHERE email=? AND password=? ' , [token1, email1, password1])
+        db.commit()
+        return token1
+    
+def change_password(token1, oldPassword, newPassword):
+    pc = query_db('SELECT password FROM user_info WHERE token=?',[token1])
+    #if "".join(pc) == "".join(oldPassword):
     db = get_db()
-    db.execute('insert into user_info (firstname, familyname, gender, city, country, email, password) values (?,?,?,?,?,?,?)', [firstname, familyname, gender, city, country, email, password])
+    db.execute('UPDATE user_info SET password=? WHERE token=?', [newPassword, token1])
     db.commit()
+    #else:    
+        #return "error"
+   
+
+def sign_out(tokreset,token1):
+    db = get_db()
+    db.execute('UPDATE user_info SET token=? WHERE token=?' , [tokreset, token1])
+    db.commit()        
+    return "You have now signed-out"
+
+def get_user_data_by_token(token):
+    user = query_db('SELECT email,firstname, familyname, gender, city, country FROM user_info WHERE token=?',[token])
+    r = user[0]
+    return r
+
+def get_user_data_by_email(email):
+    user = query_db('SELECT email,firstname, familyname, gender, city, country FROM user_info WHERE email=?',[email])
+    r = user[0]
+    return r
+
+def post_message(token, email, message):
+    #user = query_db('SELECT email FROM user_info WHERE email=?',[email])
+    #if user is None:
+    #    return 'The reciever of this message is not registered'
+    #else:   
+    au = query_db('SELECT email FROM user_info WHERE token=?',[token])
+    return au
+    #ab = "".join(au) 
+    #db = get_db()
+    #db.execute('insert into messanges(author, receiver, message) values (?,?,?)', [ab, email, message])
+    #db.commit()
+
+
+
+
+    
