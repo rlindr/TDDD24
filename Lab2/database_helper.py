@@ -63,7 +63,7 @@ def close_db(error):
 def sign_in(email1,password1,token1):
     user = query_db('SELECT email,password FROM user_info WHERE email=? AND password=?',[email1,password1])
     if user is None:
-        return 'No such user'
+        return 'No such user registered in the database'
     else:
         db = get_db()
         db.execute('UPDATE user_info SET token=? WHERE email=? AND password=? ' , [token1, email1, password1])
@@ -72,11 +72,13 @@ def sign_in(email1,password1,token1):
 
 
 def sign_up(firstname,familyname,gender,city,country,email,password):
-    db = get_db()
-    db.execute('insert into user_info (firstname, familyname, gender, city, country, email, password) values (?,?,?,?,?,?,?)', [firstname, familyname, gender, city, country, email, password])
-    db.commit()
-
-   
+    user = query_db('SELECT email FROM user_info WHERE email=?',[email])
+    if user is None:
+        return 'There is already an user registered with that username'
+    else:
+        db = get_db()
+        db.execute('insert into user_info (firstname, familyname, gender, city, country, email, password) values (?,?,?,?,?,?,?)', [firstname, familyname, gender, city, country, email, password])
+        db.commit()
 
 def change_password(token1, oldPassword, newPassword):
     
@@ -90,9 +92,14 @@ def change_password(token1, oldPassword, newPassword):
    
 
 def sign_out(tokreset,token1):
-    db = get_db()
-    db.execute('UPDATE user_info SET token=? WHERE token=?' , [tokreset, token1])
-    db.commit()
+    re = query_db('SELECT token FROM user_info WHERE token=?',[token1])
+    re = ",".join(re) 
+    if re == token1:
+        db = get_db()
+        db.execute('UPDATE user_info SET token=? WHERE token=?' , [tokreset, token1])
+        db.commit()
+    else:
+        return "You tried to log-out from wrong user"
 
 
 def get_user_data_by_token(token1):
@@ -110,11 +117,15 @@ def get_user_data_by_email(email):
         return user
 
 def post_message(token, email, message):
-    au = query_db('SELECT email FROM user_info WHERE token=?',[token])
-    au = ",".join(au) 
-    db = get_db()
-    db.execute('insert into messanges(author, receiver, message) values (?,?,?)', [au, email, message])
-    db.commit()
+    user = query_db('SELECT email FROM user_info WHERE email=?',[email])
+    if user is None:
+        return 'The reciever of this message is not registered'
+    else:    
+        au = query_db('SELECT email FROM user_info WHERE token=?',[token])
+        au = ",".join(au) 
+        db = get_db()
+        db.execute('insert into messanges(author, receiver, message) values (?,?,?)', [au, email, message])
+        db.commit()
     
 def get_user_messages_by_token(token):
     re = query_db('SELECT email FROM user_info WHERE token=?',[token])
