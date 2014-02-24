@@ -110,13 +110,27 @@ def post_message(token, email, message):
     #    return 'The reciever of this message is not registered'
     #else:   
     au = query_db('SELECT email FROM user_info WHERE token=?',[token])
-    return au
-    #ab = "".join(au) 
-    #db = get_db()
-    #db.execute('insert into messanges(author, receiver, message) values (?,?,?)', [ab, email, message])
-    #db.commit()
+    ad = ",".join(au[0]) 
+    db = get_db()
+    db.execute('insert into messanges(author, receiver, message) values (?,?,?)', [ad, email, message])
+    db.commit()
 
 
-
+def get_user_messages_by_token(token):
+    re = query_db('SELECT email FROM user_info WHERE token=?',[token])
+    rt = ''.join(re[0]) 
+    mes = query_db('SELECT message FROM messanges WHERE receiver=?',[rt])
+    if mes is None:
+        return 'None'
+    else:
+        return ''.join(mes[0]) 
+        
+    
+def get_user_messages_by_email(email):
+    mes = query_db('SELECT message FROM messanges WHERE receiver=?',[email])
+    if mes is None:
+        return 'None'
+    else:
+        return mes[0]
 
     
