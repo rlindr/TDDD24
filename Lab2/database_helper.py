@@ -5,6 +5,9 @@ import os
 import random
 import string
 import sys
+import uuid
+import hashlib as ps
+ 
 
 # create our little application :)
 app = Flask(__name__)
@@ -62,7 +65,7 @@ def close_db(error):
 
 def sign_in(email1,password1,token1):
     user = query_db('SELECT email,password FROM user_info WHERE email=? AND password=?',[email1,password1])
-    if user is None:
+    if user == None:
         return 'No such user registered in the database'
     else:
         db = get_db()
@@ -137,7 +140,7 @@ def get_user_messages_by_token(token):
         return mes
         
     
-def get_user_messages_by_email(token, email):
+def get_user_messages_by_email(email):
     mes = query_db('SELECT message FROM messanges WHERE receiver=?',[email])
     if mes is None:
         return 'None'
