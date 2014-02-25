@@ -10,9 +10,6 @@ import uuid
 import hashlib as ps
  
 
-   
-
-
 # create our little application :)
 app = Flask(__name__)
 app.config['DEBUG'] = True
