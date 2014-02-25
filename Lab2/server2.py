@@ -6,18 +6,25 @@ import random
 import string
 import sys
 import database_helper2 as dh
+import uuid
+import hashlib as ps
+ 
+
+   
 
 
 # create our little application :)
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
+def create_hash(password):
+    return ps.sha256(password.encode()).hexdigest()
 
 @app.route('/signin', methods=['POST', 'GET']) 
 def sign_in():
     email1 = request.args.get('email')
     password1 = request.args.get('password')
-    #password1 = create_hash(password1)
+    password1 = create_hash(password1)
     length = 20
     generated_token = string.ascii_uppercase + string.digits +string.ascii_lowercase 
     token1 = ''.join(random.choice(generated_token) for i in range(length))
@@ -34,6 +41,7 @@ def sign_up():
     country = request.args.get('country')
     email = request.args.get('email')
     password = request.args.get('password')
+    password = create_hash(password)
     dh.sign_up(firstname,familyname,gender,city, country, email, password)
     return "You are now signed-up"
    
@@ -42,8 +50,8 @@ def change_password():
     token1 = request.args.get('token')
     oldPassword = request.args.get('oldPassword')
     newPassword = request.args.get('newPassword')
-    #oldPassword = create_hash(oldPassword)
-    #newPassword = create_hash(newPassword)
+    oldPassword = create_hash(oldPassword)
+    newPassword = create_hash(newPassword)
     err= dh.change_password(token1, oldPassword, newPassword)
     if err == "error":
         return "You wrote wrong old password"
@@ -91,7 +99,7 @@ def get_user_messages_by_token():
     if mes is None:
         return 'No messages'
     else:
-        return mes   
+        return ''.join(mes[0])    
         
         
 @app.route('/getusermessagesbyemail', methods=['POST', 'GET'])

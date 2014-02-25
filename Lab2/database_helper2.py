@@ -119,11 +119,13 @@ def post_message(token, email, message):
 def get_user_messages_by_token(token):
     re = query_db('SELECT email FROM user_info WHERE token=?',[token])
     rt = ''.join(re[0]) 
-    mes = query_db('SELECT message FROM messanges WHERE receiver=?',[rt])
+    db = get_db()
+    mes = db.execute('SELECT message FROM messanges WHERE receiver=?',[rt]).fetchall()
+    db.commit()
     if mes is None:
         return 'None'
     else:
-        return ''.join(mes[0]) 
+        return mes 
         
     
 def get_user_messages_by_email(email):
