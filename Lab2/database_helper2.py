@@ -118,21 +118,24 @@ def post_message(token, email, message):
 
 def get_user_messages_by_token(token):
     re = query_db('SELECT email FROM user_info WHERE token=?',[token])
-    rt = ''.join(re[0]) 
-    db = get_db()
-    mes = db.execute('SELECT message FROM messanges WHERE receiver=?',[rt]).fetchall()
-    db.commit()
-    if mes is None:
-        return 'None'
-    else:
-        return mes 
-        
+    rt = ''.join(re[0])
+    l = []
+    for mes in query_db('SELECT message FROM messanges WHERE receiver=?',[rt]):
+        if mes is None:
+            return 'None'
+        else:
+            l.append(mes['message']) 
+    st = '\n'.join(l)
+    return st
     
 def get_user_messages_by_email(email):
-    mes = query_db('SELECT message FROM messanges WHERE receiver=?',[email])
-    if mes is None:
-        return 'None'
-    else:
-        return mes[0]
+    ll = []
+    for mes in query_db('SELECT message FROM messanges WHERE receiver=?',[email]):
+        if mes is None:
+            return 'None'
+        else:
+            ll.append(mes['message']) 
+    st = '\n'.join(ll)
+    return st
 
     

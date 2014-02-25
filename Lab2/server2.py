@@ -96,7 +96,7 @@ def get_user_messages_by_token():
     if mes is None:
         return 'No messages'
     else:
-        return ''.join(mes[0])    
+        return mes    
         
         
 @app.route('/getusermessagesbyemail', methods=['POST', 'GET'])
@@ -107,7 +107,7 @@ def get_user_messages_by_email():
     if mes is None:
         return 'No messages'
     else:
-        return ",".join(mes)    
+        return mes  
 
 
 if __name__ == '__main__':
